@@ -1,0 +1,1 @@
+g++ -o "/home/buaichifanqie/projects/simple_http/bin/x64/Debug/simple_http.out" -Wl,--no-undefined -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack /home/buaichifanqie/projects/simple_http/obj/x64/Debug/main.o /home/buaichifanqie/projects/simple_http/obj/x64/Debug/Server.o

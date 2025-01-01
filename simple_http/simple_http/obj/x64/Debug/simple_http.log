@@ -4,6 +4,6 @@
   正在验证体系结构
   正在启动远程生成
   正在编译源:
-  main.c
   Server.c
-D:\vs\MSBuild\Microsoft\VC\v170\Application Type\Linux\1.0\Linux.targets(439,5): error : g++ 已退出，代码为 1，请查看“输出窗口”-“生成输出”，了解详细信息(注意: 若要在“输出窗口”中查看详细信息，则可能需要在“工具选项”中更改生成输出的详细程度)。
+  正在链接对象
+  simple_http.vcxproj -> D:\基于多反应堆( Reactor)的高并发服务器C++\simple_http\simple_http\bin\x64\Debug\simple_http.out
