@@ -80,6 +80,8 @@
     <ClCompile Include="EpollDispatcher.c" />
     <ClCompile Include="EventLoop.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="PollDispatcher.c" />
+    <ClCompile Include="SelectDispatcher.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Channel.h" />
