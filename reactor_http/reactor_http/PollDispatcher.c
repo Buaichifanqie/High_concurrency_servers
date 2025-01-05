@@ -135,11 +135,11 @@ static int pollDispatch(struct EventLoop* evLoop, int timeout)
 
 		if (data->fds[i].revents & POLLIN)
 		{
-
+			eventActivate(evLoop, data->fds[i].fd, ReadEvent);
 		}
 		if (data->fds[i].revents & POLLOUT)
 		{
-
+			eventActivate(evLoop, data->fds[i].fd, WriteEvent);
 		}
 	}
 	return 0;

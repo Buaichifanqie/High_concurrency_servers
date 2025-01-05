@@ -1,10 +1,27 @@
 #include "EventLoop.h"
 #include<assert.h>
+#include<sys/socket.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 struct EventLoop* eventLoopInit()
 {
 	return eventLoopInitEx(NULL);
+}
+
+//写数据
+void taskWakeup(struct EventLoop* evLoop)
+{
+	const char* msg = "我要玩奥奇传说！！！";
+	wirte(evLoop->socketPair[0], msg, strlen(msg));
+}
+
+//读数据
+int readLocalMessage(void* arg)
+{
+	struct EventLoop* evLoop = (struct EventLoop*)arg;
+	char buf[256];
+	read(evLoop->socketPair[1], buf, sizeof(buf));
+	return 0;
 }
 
 struct EventLoop* eventLoopInitEx(const char* threadName)
@@ -20,6 +37,17 @@ struct EventLoop* eventLoopInitEx(const char* threadName)
 	evLoop->head = evLoop->tail = NULL;
 	//map
 	evLoop->channelMap = channelMapInit(128);
+	int ret = socketpair(AF_UNIX,SOCK_STREAM,0,evLoop->socketPair);
+	if (ret == -1)
+	{
+		perror("socketpair");
+		exit(0);
+	} 
+	//指定规则evLoop->socketPair[0]发送数据 evLoop->socketPair[1]接收数据
+	struct Channel* channel = channelInit(evLoop->socketPair[1], ReadEvent,
+		readLocalMessage, NULL, evLoop);
+	//channel添加到任务队列
+	eventLoopAddTask(evLoop, channel, ADD); 
 	return evLoop;
 }
 
@@ -37,7 +65,163 @@ int eventLoopRun(struct EventLoop* evLoop)
 	//循环事件处理
 	while (!evLoop->isQuit)
 	{
-		dispatcher->dispatch(evLoop, 2);
+		dispatcher->dispatch(evLoop, 2);//超时时长2s
+		eventLoopProcessTask(evLoop);
 	}
 	return 0;
 }
+
+int eventActivate(struct EventLoop* evLoop, int fd, int event)
+{
+	if (fd < 0 || evLoop == NULL)
+	{
+		return -1;
+	}
+	//取出channel
+	struct Channel* channel = evLoop->channelMap->list[fd];
+	assert(channel->fd == fd);
+	if (event & ReadEvent && channel->readCallback)
+	{
+		channel->readCallback(channel->arg);
+	}
+	if (event & WriteEvent && channel->writeCallback)
+	{
+		channel->writeCallback(channel->arg);
+	}
+	return 0;
+}
+
+int eventLoopAddTask(struct EventLoop* evLoop,struct Channel* channel, int type)
+{
+	//加锁保护共享资源
+	pthread_mutex_lock(&evLoop->mutex);
+	//创建新节点
+	struct ChannelElement* node = (struct ChannelElement*)malloc(sizeof(struct ChannelElement));
+	node->channel = channel;
+	node->type = type;
+	node->next = NULL;
+	//链表为空
+	if (evLoop->head == NULL)
+	{
+		evLoop->head = evLoop->tail = node;
+	}
+	else
+	{
+		evLoop->tail->next = node; //add
+		evLoop->tail = node;       //后移
+	}
+	pthread_mutex_unlock(&evLoop->mutex);
+	//处理节点
+	/*
+	细节：
+	1.对于链表节点的添加：可能是当前线程也可能是其它线程（主线程）
+		1）修改fd的事件，当前子线程发起，当前子线程处理
+		2）添加新的fd，添加任务节点的操作是由主线程发起的
+	2.不能让主线程处理任务队列，需要让当前的子线程进行处理
+	*/
+	if (evLoop->threadID == pthread_self())
+	{
+		//当前子线程
+		eventLoopProcessTask(evLoop);
+	}
+	else
+	{
+		//主线程--告诉子线程处理任务队列的任务
+		//1.子线程在工作 2.子线程被阻塞了：select poll epoll
+		taskWake(evLoop);
+	}
+
+	return 0;
+}
+
+int eventLoopProcessTask(struct EventLoop* evLoop)
+{
+	pthread_mutex_lock(&evLoop->mutex);
+	//取出头节点
+	struct ChannelElement* head = evLoop->head;
+	while (head != NULL)
+	{
+		struct Channel* channel = head->channel;
+		if (head->type == ADD)
+		{
+			//添加
+			eventLoopAdd(evLoop, channel);
+		}
+		else if (head->type == DELETE)
+		{
+			//删除
+			eventLoopRemove(evLoop, channel);
+		}
+		else if (head->type == MODIFY)
+		{
+			//修改
+			eventLoopModify(evLoop, channel);
+		}
+		struct ChannelElement* tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	evLoop->head = evLoop->tail = NULL;
+	pthread_mutex_ulock(&evLoop->mutex);
+	return 0;
+}
+
+int eventLoopAdd(struct EventLoop* evLoop,struct Channel* channel)
+{
+	int fd = channel->fd;
+	struct ChannelMap* channelMap = evLoop->channelMap;
+	if (fd >= channelMap->size)
+	{
+		//没有足够的空间存储键值对fd-channel=====>扩容
+		if (!makeMapRoom(channelMap, fd, sizeof(struct Channel*)))
+		{
+			return -1;
+		}
+		
+	}
+	//找到fd对应的数组元素的位置，并存储
+	if (channelMap->list[fd] == NULL)
+	{
+		//核心
+		channelMap->list[fd] = channel;
+		evLoop->dispatcher->add(channel, evLoop);
+	}
+	return 0;
+}
+
+int eventLoopRemove(struct EventLoop* evLoop,struct Channel* channel)
+{
+	int fd = channel->fd;
+	struct ChannelMap* channelMap = evLoop->channelMap;
+	if (fd >= channelMap->size)
+	{
+		return -1;
+	}
+	int ret = evLoop->dispatcher->remove(channel, evLoop);
+	return ret;
+}
+
+int eventLoopModify(struct EventLoop* evLoop,struct Channel* channel)
+{
+	int fd = channel->fd;
+	struct ChannelMap* channelMap = evLoop->channelMap;
+	if (fd>=channelMap->size || channelMap->list[fd]==NULL)
+	{
+		return -1;
+	}
+	int ret = evLoop->dispatcher->modify(channel, evLoop);
+	return ret;
+}
+
+int destoryChannel(struct EventLoop* evLoop,struct Channel* channel)
+{
+	//删除channel和fd的对应关系
+	evLoop->channelMap->list[channel->fd] = NULL;
+	//关闭fd
+	close(channel->fd);
+	//释放channel
+	free(channel);
+	return 0;
+}
+
+
