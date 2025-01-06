@@ -75,6 +75,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="Buffer.c" />
     <ClCompile Include="Channel.c" />
     <ClCompile Include="ChannelMap.c" />
     <ClCompile Include="EpollDispatcher.c" />
@@ -86,6 +87,7 @@
     <ClCompile Include="WorkerThread.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.h" />
     <ClInclude Include="Channel.h" />
     <ClInclude Include="ChannelMap.h" />
     <ClInclude Include="Dispatcher.h" />
