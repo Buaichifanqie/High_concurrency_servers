@@ -121,7 +121,7 @@ int eventLoopAddTask(struct EventLoop* evLoop,struct Channel* channel, int type)
 	*/
 	if (evLoop->threadID == pthread_self())
 	{
-		//当前子线程
+		//当前子线程(基于子线程的角度)
 		eventLoopProcessTask(evLoop);
 	}
 	else
