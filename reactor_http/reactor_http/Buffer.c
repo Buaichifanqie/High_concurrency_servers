@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<sys/uio.h>
+#include<string.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 struct Buffer* bufferInit(int size)
@@ -121,4 +122,13 @@ int bufferSocketRead(struct Buffer* buffer, int fd)
 	}
 	free(tmpbuf);
 	return result;
+}
+
+char* bufferFindCRLF(struct Buffer* buffer)
+{
+	//strstr-->大字符串中匹配小字符串（遇到\0结束）
+	//memmem-->大数据块中匹配子数据块（需要指定数据块大小）
+
+	char* ptr = memmem(buffer->data + buffer->readPos, bufferReadableSize(buffer), "\r\n", 2);
+	return ptr;
 }
