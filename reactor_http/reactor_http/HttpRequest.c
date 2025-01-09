@@ -4,6 +4,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <dirent.h>
+#include <fcntl.h>
+#include <unistd.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 #define HeaderSize 12
@@ -186,7 +189,8 @@ bool parseHttpRequestHeader(struct HttpRequest* request,struct Buffer* readBuf)
 	return false;
 }
 
-bool parseHttpRequest(struct HttpRequest* request,struct Buffer* readBuf)
+bool parseHttpRequest(struct HttpRequest* request,struct Buffer* readBuf,
+	struct HttpResponse* response, struct Buffer* sendBuf, int socket)
 {
 	bool flag = true;
 	while (request->curState!=ParseReqDone)
@@ -212,16 +216,17 @@ bool parseHttpRequest(struct HttpRequest* request,struct Buffer* readBuf)
 		if (request->curState == ParseReqDone)
 		{
 			//根据解析出的原始数据，对客户端的请求做出处理
-			
+			processHttpRequest(request,response);
 			//组织响应数据并发送给客户端
+			httpResponsePrepareMsg(response, sendBuf, socket);
 		}
-	}
+	} 
 	request->curState = ParseReqLine;//状态还原保证还能继续处理第二条 以及以后的请求
 	return flag;
 }
 
 //处理基于get的http请求
-bool processHttpRequest(struct HttpRequest* request)
+bool processHttpRequest(struct HttpRequest* request, struct HttpResponse* response)
 {
 	if (strcasecmp(request->method, "get") != 0)
 	{
@@ -246,20 +251,41 @@ bool processHttpRequest(struct HttpRequest* request)
 		// 文件不存在 -- 回复404
 		//sendHeadMsg(cfd, 404, "Not Found", getFileType(".html"), -1);
 		//sendFile("404.html", cfd);
+		strcpy(response->filename, "404.html");
+		response->statusCode = NotFound;
+		strcpy(response->statusMsg, "Not Found");
+		//响应头
+		httpRequestAddHeader(response, "Content-type", getFileType(".html"));
+		response->sendDataFunc = sendFile;
 		return 0;
 	}
+
+	strcpy(response->filename, file);
+	response->statusCode = OK;
+	strcpy(response->statusMsg, "OK");
 	// 判断文件类型
 	if (S_ISDIR(st.st_mode))
 	{
 		// 把这个目录中的内容发送给客户端
 		//sendHeadMsg(cfd, 200, "OK", getFileType(".html"), -1);
 		//sendDir(file, cfd);
+		
+		//响应头
+		httpRequestAddHeader(response, "Content-type", getFileType(".html"));
+		response->sendDataFunc = sendDir;
 	}
 	else
 	{
 		// 把文件的内容发送给客户端
 		//sendHeadMsg(cfd, 200, "OK", getFileType(file), st.st_size);
 		//sendFile(file, cfd);
+		strcpy(response->filename, file);
+		//响应头
+		char tmp[12] = { 0 };
+		sprintf("%ld", st.st_size);
+		httpRequestAddHeader(response, "Content-type", getFileType(file));
+		httpRequestAddHeader(response, "Content-length",tmp);
+		response->sendDataFunc = sendDir; 
 	}
 	return false;
 }
@@ -290,4 +316,129 @@ void decodeMsg(char* to, char* from)
 
 	}
 	*to = '\0';
+}
+
+const char* getFileType(const char* name)
+{
+	// a.jpg a.mp4 a.html
+	// 自右向左查找‘.’字符, 如不存在返回NULL
+	const char* dot = strrchr(name, '.');
+	if (dot == NULL)
+		return "text/plain; charset=utf-8";	// 纯文本
+	if (strcmp(dot, ".html") == 0 || strcmp(dot, ".htm") == 0)
+		return "text/html; charset=utf-8";
+	if (strcmp(dot, ".jpg") == 0 || strcmp(dot, ".jpeg") == 0)
+		return "image/jpeg";
+	if (strcmp(dot, ".gif") == 0)
+		return "image/gif";
+	if (strcmp(dot, ".png") == 0)
+		return "image/png";
+	if (strcmp(dot, ".css") == 0)
+		return "text/css";
+	if (strcmp(dot, ".au") == 0)
+		return "audio/basic";
+	if (strcmp(dot, ".wav") == 0)
+		return "audio/wav";
+	if (strcmp(dot, ".avi") == 0)
+		return "video/x-msvideo";
+	if (strcmp(dot, ".mov") == 0 || strcmp(dot, ".qt") == 0)
+		return "video/quicktime";
+	if (strcmp(dot, ".mpeg") == 0 || strcmp(dot, ".mpe") == 0)
+		return "video/mpeg";
+	if (strcmp(dot, ".vrml") == 0 || strcmp(dot, ".wrl") == 0)
+		return "model/vrml";
+	if (strcmp(dot, ".midi") == 0 || strcmp(dot, ".mid") == 0)
+		return "audio/midi";
+	if (strcmp(dot, ".mp3") == 0)
+		return "audio/mpeg";
+	if (strcmp(dot, ".ogg") == 0)
+		return "application/ogg";
+	if (strcmp(dot, ".pac") == 0)
+		return "application/x-ns-proxy-autoconfig";
+
+	return "text/plain; charset=utf-8";
+}
+
+void sendDir(const char* dirName, struct Buffer* sendBuf,int cfd)
+{
+	char buf[4096] = { 0 };
+	sprintf(buf, "<html><head><title>%s</title></head><body><table>", dirName);
+	struct dirent** namelist;
+	int num = scandir(dirName, &namelist, NULL, alphasort);
+	for (int i = 0; i < num; ++i)
+	{
+		// 取出文件名 namelist 指向的是一个指针数组 struct dirent* tmp[]
+		char* name = namelist[i]->d_name;
+		struct stat st;
+		char subPath[1024] = { 0 };
+		sprintf(subPath, "%s/%s", dirName, name);
+		stat(subPath, &st);
+		if (S_ISDIR(st.st_mode))
+		{
+			// a标签 <a href="">name</a>
+			sprintf(buf + strlen(buf),
+				"<tr><td><a href=\"%s/\">%s</a></td><td>%ld</td></tr>",
+				name, name, st.st_size);
+		}
+		else
+		{
+			sprintf(buf + strlen(buf),
+				"<tr><td><a href=\"%s\">%s</a></td><td>%ld</td></tr>",
+				name, name, st.st_size);
+		}
+		//send(cfd, buf, strlen(buf), 0);
+		bufferAppendString(sendBuf, buf);
+		memset(buf, 0, sizeof(buf));
+		free(namelist[i]);
+	}
+	sprintf(buf, "</table></body></html>");
+	//send(cfd, buf, strlen(buf), 0);
+	bufferAppendString(sendBuf, buf);
+	free(namelist);
+	return 0;
+}
+
+
+int sendFile(const char* fileName,struct Buffer* sendBuf, int cfd)
+{
+	// 1. 打开文件
+	int fd = open(fileName, O_RDONLY);
+	assert(fd > 0);
+#if 1  
+	while (1)
+	{
+		char buf[1024];
+		int len = read(fd, buf, sizeof buf);
+		if (len > 0)
+		{
+			//send(cfd, buf, len, 0);
+			bufferAppendData(sendBuf, buf, len);
+			usleep(10); // 这非常重要
+		}
+		else if (len == 0)
+		{
+			break;
+		}
+		else
+		{
+			close(fd);
+			perror("read");
+		}
+	}
+#else
+	off_t offset = 0;
+	int size = lseek(fd, 0, SEEK_END);
+	lseek(fd, 0, SEEK_SET);
+	while (offset < size)
+	{
+		int ret = sendfile(cfd, fd, &offset, size - offset);
+		printf("ret value: %d\n", ret);
+		if (ret == -1 && errno == EAGAIN)
+		{
+			printf("没数据...\n");
+		}
+	}
+#endif
+	close(fd);
+	return 0;
 }
