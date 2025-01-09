@@ -4,6 +4,8 @@
 #include "Channel.h"
 #include "HttpRequest.h"
 #include "HttpResponse.h"
+
+#define MSG_SEND_AUTO
 struct TcpConnection
 {
 	struct EventLoop* evLoop;
@@ -17,4 +19,6 @@ struct TcpConnection
 };
 
 //≥ı ºªØ
-struct TcpConnection* tcpConnectionInit(int fd, struct EventLoop* evLoop);
+struct TcpConnection* tcpConnectionInit(int fd, struct EventLoop* evLoop); 
+//
+void TcpConnectionDestroy(struct TcpConnection* conn);

@@ -54,6 +54,9 @@ void httpResponsePrepareMsg(struct HttpResponse* response,struct Buffer* sendBuf
 	}
 	//空行
 	bufferAppendString(sendBuf,"\r\n");
+#ifndef MSG_SEND_AUTO
+	bufferSendData(sendBuf, socket);
+#endif	
 	//回复的数据
 	response->sendDataFunc(response->filename, sendBuf, socket);
 }

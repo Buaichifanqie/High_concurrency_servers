@@ -81,6 +81,8 @@ static int epollRemove(struct Channel* channel, struct EventLoop* evLoop)
 		perror("epoll_ctl_del");
 		exit(0);
 	}
+	//通过channel释放对应的TcpConnection资源
+	channel->destroyCallback(channel->arg);
 	return ret;
 }
 static int epollModify(struct Channel* channel, struct EventLoop* evLoop)

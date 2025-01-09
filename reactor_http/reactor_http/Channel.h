@@ -23,11 +23,12 @@ struct Channel
 	//回调函数
 	handleFunc readCallback;
 	handleFunc writeCallback;
+	handleFunc destroyCallback;
 	//回调函数的参数
 	void* arg;
 };
 //初始化一个Channel
-struct Channel* channelInit(int fd,int events,handleFunc readFunc,handleFunc writeFunc,void* arg);
+struct Channel* channelInit(int fd,int events,handleFunc readFunc,handleFunc writeFunc, handleFunc destroyFunc, void* arg);
 //修改fd的写事件（检测or不检测）
 void writeEventEnable(struct Channel* channel, bool flag);
 //判断是否要检测文件描述符的写事件

@@ -77,6 +77,8 @@ static int selectRemove(struct Channel* channel, struct EventLoop* evLoop)
 {
 	struct SelectData* data = (struct SelectData*)malloc(sizeof(struct SelectData));
 	clearFdSet(channel, data);
+	//通过channel释放对应的TcpConnection资源
+	channel->destroyCallback(channel->arg);
 	return 0;
 }
 static int selectModify(struct Channel* channel, struct EventLoop* evLoop)

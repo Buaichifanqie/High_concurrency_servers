@@ -132,3 +132,20 @@ char* bufferFindCRLF(struct Buffer* buffer)
 	char* ptr = memmem(buffer->data + buffer->readPos, bufferReadableSize(buffer), "\r\n", 2);
 	return ptr;
 }
+
+int bufferSendData(struct Buffer* buffer, int socket)
+{
+	//判断有无数据
+	int readable = bufferReadableSize(buffer);
+	if (readable > 0)
+	{
+		int count = send(socket, buffer->data + buffer->readPos, readable,0);
+		if (count > 0)
+		{
+			buffer->readPos += count;
+			usleep(1);
+		}
+		return count;
+	}
+	return 0;
+}

@@ -388,12 +388,18 @@ void sendDir(const char* dirName, struct Buffer* sendBuf,int cfd)
 		}
 		//send(cfd, buf, strlen(buf), 0);
 		bufferAppendString(sendBuf, buf);
+#ifndef MSG_SEND_AUTO
+		bufferSendData(sendBuf, cfd);
+#endif		
 		memset(buf, 0, sizeof(buf));
 		free(namelist[i]);
 	}
 	sprintf(buf, "</table></body></html>");
 	//send(cfd, buf, strlen(buf), 0);
 	bufferAppendString(sendBuf, buf);
+#ifndef MSG_SEND_AUTO
+	bufferSendData(sendBuf, cfd);
+#endif
 	free(namelist);
 	return 0;
 }
@@ -413,6 +419,9 @@ int sendFile(const char* fileName,struct Buffer* sendBuf, int cfd)
 		{
 			//send(cfd, buf, len, 0);
 			bufferAppendData(sendBuf, buf, len);
+#ifndef MSG_SEND_AUTO
+			bufferSendData(sendBuf, cfd);
+#endif
 			usleep(10); // 这非常重要
 		}
 		else if (len == 0)
