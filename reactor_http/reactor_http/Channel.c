@@ -1,5 +1,5 @@
 #include "Channel.h"
-
+#include <stdlib.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 struct Channel* channelInit(int fd, int events, handleFunc readFunc, handleFunc writeFunc, 

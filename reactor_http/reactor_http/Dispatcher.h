@@ -2,6 +2,9 @@
 
 #include "Channel.h"
 #include "EventLoop.h"
+
+
+struct EventLoop;
 //里面都是函数指针
 struct Dispatcher//事件分发器
 {

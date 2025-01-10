@@ -1,6 +1,7 @@
 #include "ThreadPool.h"
 #define _CRT_SECURE_NO_WARNINGS
 #include<assert.h>
+#include <stdlib.h>
 struct ThreadPool* threadPoolInit(struct EventLoop* mainLoop, int count)
 {
 	struct ThreadPool* pool = (struct ThreadPool*)malloc(sizeof(struct ThreadPool));

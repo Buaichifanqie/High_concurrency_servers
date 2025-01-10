@@ -54,5 +54,7 @@ void decodeMsg(char* to, char* from);
 //状态转换
 const char* getFileType(const char* name);
 
-int sendDir(const char* dirName, int cfd);
-int sendFile(const char* fileName, int cfd);
+void sendDir(const char* dirName, struct Buffer* sendBuf, int cfd);
+int sendFile(const char* fileName, struct Buffer* sendBuf, int cfd);
+// 将字符转换为整形数
+int hexToDec(char c);

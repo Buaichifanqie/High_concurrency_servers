@@ -1,7 +1,11 @@
 #include "EventLoop.h"
 #include<assert.h>
 #include<sys/socket.h>
+#include <unistd.h>
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 struct EventLoop* eventLoopInit()
 {
@@ -12,7 +16,7 @@ struct EventLoop* eventLoopInit()
 void taskWakeup(struct EventLoop* evLoop)
 {
 	const char* msg = "我要玩奥奇传说！！！";
-	wirte(evLoop->socketPair[0], msg, strlen(msg));
+	write(evLoop->socketPair[0], msg, strlen(msg));
 }
 
 //读数据
@@ -45,7 +49,7 @@ struct EventLoop* eventLoopInitEx(const char* threadName)
 	} 
 	//指定规则evLoop->socketPair[0]发送数据 evLoop->socketPair[1]接收数据
 	struct Channel* channel = channelInit(evLoop->socketPair[1], ReadEvent,
-		readLocalMessage, NULL, evLoop);
+		readLocalMessage, NULL,NULL, evLoop);
 	//channel添加到任务队列
 	eventLoopAddTask(evLoop, channel, ADD); 
 	return evLoop;
@@ -128,7 +132,7 @@ int eventLoopAddTask(struct EventLoop* evLoop,struct Channel* channel, int type)
 	{
 		//主线程--告诉子线程处理任务队列的任务
 		//1.子线程在工作 2.子线程被阻塞了：select poll epoll
-		taskWake(evLoop);
+		taskWakeup(evLoop);
 	}
 
 	return 0;
@@ -162,7 +166,7 @@ int eventLoopProcessTask(struct EventLoop* evLoop)
 		free(tmp);
 	}
 	evLoop->head = evLoop->tail = NULL;
-	pthread_mutex_ulock(&evLoop->mutex);
+	pthread_mutex_unlock(&evLoop->mutex);
 	return 0;
 }
 

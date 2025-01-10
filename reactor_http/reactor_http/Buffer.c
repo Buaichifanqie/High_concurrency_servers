@@ -3,6 +3,9 @@
 #include<stdlib.h>
 #include<sys/uio.h>
 #include<string.h>
+#include<unistd.h>
+#include<sys/socket.h> 
+#include<strings.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 struct Buffer* bufferInit(int size)

@@ -1,6 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Dispatcher.h"
 #include <sys/epoll.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #define Max 520
 struct EpollData
 {
@@ -126,4 +130,5 @@ static int epollClear(struct EventLoop* evLoop)
 	free(data->events);
 	close(data->epfd);
 	free(data);
+	return 0;
 }

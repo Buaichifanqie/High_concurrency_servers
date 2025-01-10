@@ -7,6 +7,9 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <assert.h>
+#include "TcpConnection.h"
+#include <ctype.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 #define HeaderSize 12
@@ -60,8 +63,8 @@ enum HttpRequestState httpRequestState(struct HttpRequest* request)
 
 void httpRequestAddHeader(struct HttpRequest* request, const char* key, const char* value)
 {
-	request->reqHeaders[request->reqHeadersNum].key = key;
-	request->reqHeaders[request->reqHeadersNum].value = value;
+	request->reqHeaders[request->reqHeadersNum].key = (char*)key;
+	request->reqHeaders[request->reqHeadersNum].value = (char*)value;
 	request->reqHeadersNum++;
 }
 
@@ -282,7 +285,7 @@ bool processHttpRequest(struct HttpRequest* request, struct HttpResponse* respon
 		strcpy(response->filename, file);
 		//响应头
 		char tmp[12] = { 0 };
-		sprintf("%ld", st.st_size);
+		sprintf(tmp,"%ld", st.st_size);
 		httpRequestAddHeader(response, "Content-type", getFileType(file));
 		httpRequestAddHeader(response, "Content-length",tmp);
 		response->sendDataFunc = sendDir; 
@@ -449,5 +452,18 @@ int sendFile(const char* fileName,struct Buffer* sendBuf, int cfd)
 	}
 #endif
 	close(fd);
+	return 0;
+}
+
+// 将字符转换为整形数
+int hexToDec(char c)
+{
+	if (c >= '0' && c <= '9')
+		return c - '0';
+	if (c >= 'a' && c <= 'f')
+		return c - 'a' + 10;
+	if (c >= 'A' && c <= 'F')
+		return c - 'A' + 10;
+
 	return 0;
 }

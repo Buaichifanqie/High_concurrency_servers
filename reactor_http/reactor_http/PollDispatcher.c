@@ -2,6 +2,8 @@
 
 #include "Dispatcher.h"
 #include <poll.h>
+#include <stdlib.h>
+#include <stdio.h>
 #define Max 1024
 struct PollData
 {
@@ -151,6 +153,7 @@ static int pollClear(struct EventLoop* evLoop)
 {
 	struct PollData* data = (struct PollData*)evLoop->dispatcherData;
 	free(data);
+	return 0;
 }
 
 

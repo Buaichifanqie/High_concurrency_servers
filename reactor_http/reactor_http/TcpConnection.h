@@ -21,4 +21,4 @@ struct TcpConnection
 //≥ı ºªØ
 struct TcpConnection* tcpConnectionInit(int fd, struct EventLoop* evLoop); 
 //
-void TcpConnectionDestroy(struct TcpConnection* conn);
+int TcpConnectionDestroy(void* conn);

@@ -1,5 +1,7 @@
 #include "TcpConnection.h"
 #include "HttpRequest.h"
+#include <stdlib.h>
+#include <stdio.h>
 #define _CRT_SECURE_NO_WARNINGS
 
 int processRead(void* arg)
@@ -28,6 +30,7 @@ int processRead(void* arg)
 	//¶Ï¿ªÁ¬½Ó
 	eventLoopAddTask(conn->evLoop, conn->channel, DELETE);
 #endif
+	return 0;
 } 
 
 int processWrite(void* arg)
@@ -81,4 +84,5 @@ int TcpConnectionDestroy(void* arg)
 			free(conn);
 		}
 	}
+	return 0;
 }

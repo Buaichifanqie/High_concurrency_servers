@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+#include <stdlib.h>
 #include "Dispatcher.h"
 #include <sys/select.h>
 #include <stdio.h>
@@ -121,6 +121,7 @@ static int selectClear(struct EventLoop* evLoop)
 {
 	struct SelectData* data = (struct SelectData*)malloc(sizeof(struct SelectData));
 	free(data);
+	return 0;
 }
 
 
