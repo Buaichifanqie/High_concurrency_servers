@@ -21,6 +21,7 @@ D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_htt
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\EventLoop.h|/home/buaichifanqie/projects/reactor_http/EventLoop.h
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\HttpRequest.h|/home/buaichifanqie/projects/reactor_http/HttpRequest.h
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\HttpResponse.h|/home/buaichifanqie/projects/reactor_http/HttpResponse.h
+D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\Log.h|/home/buaichifanqie/projects/reactor_http/Log.h
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\TcpConnection.h|/home/buaichifanqie/projects/reactor_http/TcpConnection.h
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\TcpServer.h|/home/buaichifanqie/projects/reactor_http/TcpServer.h
 D:\基于多反应堆( Reactor)的高并发服务器C++\reactor_http\reactor_http\ThreadPool.h|/home/buaichifanqie/projects/reactor_http/ThreadPool.h

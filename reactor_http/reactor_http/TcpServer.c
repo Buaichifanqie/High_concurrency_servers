@@ -2,8 +2,8 @@
 #include <arpa/inet.h>
 #include "TcpConnection.h"
 #include <stdio.h>
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
+#include "Log.h"
 struct TcpServer* tcpServerInit(unsigned short port, int threadNum)
 {
 	struct TcpServer* tcp = (struct TcpServer*)malloc(sizeof(struct TcpServer));
@@ -76,8 +76,10 @@ void TcpServerRun(struct TcpServer* server)
     threadPoolRun(server->threadPool);
     //添加检测任务
     //初始化一个channel实例
-    struct Channel* channel = channelInit(server->listener->lfd, ReadEvent, acceptConnection, NULL, NULL, server);
+    struct Channel* channel = channelInit(server->listener->lfd, 
+        ReadEvent, acceptConnection, NULL, NULL, server);
     eventLoopAddTask(server->mainLoop, channel, ADD);
     //启动反应堆模型
     eventLoopRun(server->mainLoop);
+    Debug("服务器程序已经启动了...");
 }
