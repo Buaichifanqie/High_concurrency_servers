@@ -34,7 +34,7 @@ struct EventLoop* eventLoopInitEx(const char* threadName)
     evLoop->threadID = pthread_self();
     pthread_mutex_init(&evLoop->mutex, NULL);
     strcpy(evLoop->threadName, threadName == NULL ? "MainThread" : threadName);
-    evLoop->dispatcher = &SelectDispatcher;
+    evLoop->dispatcher = &EpollDispatcher;
     evLoop->dispatcherData = evLoop->dispatcher->init();
     // Á´±í
     evLoop->head = evLoop->tail = NULL;
