@@ -77,15 +77,15 @@
   <ItemGroup>
     <ClCompile Include="Buffer.c" />
     <ClCompile Include="Channel.cpp" />
-    <ClCompile Include="ChannelMap.c" />
-    <ClCompile Include="EpollDispatcher.c" />
+    <ClCompile Include="Dispatcher.cpp" />
+    <ClCompile Include="EpollDispatcher.cpp" />
     <ClCompile Include="EventLoop.c" />
     <ClCompile Include="HttpRequest.c" />
     <ClCompile Include="HttpResponse.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PollDispatcher.c" />
-    <ClCompile Include="SelectDispatcher.c" />
+    <ClCompile Include="PollDispatcher.cpp" />
+    <ClCompile Include="SelectDispatcher.cpp" />
     <ClCompile Include="TcpConnection.c" />
     <ClCompile Include="TcpServer.c" />
     <ClCompile Include="ThreadPool.c" />
@@ -94,12 +94,14 @@
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Channel.h" />
-    <ClInclude Include="ChannelMap.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="EpollDispatcher.h" />
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="PollDispatcher.h" />
+    <ClInclude Include="SelectDispatcher.h" />
     <ClInclude Include="TcpConnection.h" />
     <ClInclude Include="TcpServer.h" />
     <ClInclude Include="ThreadPool.h" />

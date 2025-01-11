@@ -33,7 +33,7 @@ public:
     {
         return m_fd;
     }
-    inline const void* arg()
+    inline const void* getArg()
     {
         return m_arg;
     }
