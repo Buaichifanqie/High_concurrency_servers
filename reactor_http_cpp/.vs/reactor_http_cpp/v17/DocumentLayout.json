@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\SelectDispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\EventLoop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\EventLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Dispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Channel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Channel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Dispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\SelectDispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\SelectDispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -27,22 +51,6 @@
       "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\EpollDispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Dispatcher.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Dispatcher.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Channel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\Channel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{20737A19-F340-4F55-BFF6-462233BEDE1A}|reactor_http_cpp\\reactor_http_cpp.vcxproj|solutionrelative:reactor_http_cpp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -54,71 +62,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SelectDispatcher.h",
-              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.h",
-              "RelativeDocumentMoniker": "reactor_http_cpp\\SelectDispatcher.h",
-              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.h",
-              "RelativeToolTip": "reactor_http_cpp\\SelectDispatcher.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-01-11T14:04:18.494Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SelectDispatcher.cpp",
-              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp",
-              "RelativeDocumentMoniker": "reactor_http_cpp\\SelectDispatcher.cpp",
-              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp",
-              "RelativeToolTip": "reactor_http_cpp\\SelectDispatcher.cpp",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAADkAAAAFAAAA",
+              "Title": "EventLoop.cpp",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.cpp",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\EventLoop.cpp",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.cpp",
+              "RelativeToolTip": "reactor_http_cpp\\EventLoop.cpp",
+              "ViewState": "AQIAAL0AAAAAAAAAAAAIwAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-11T14:03:52.102Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PollDispatcher.h",
-              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.h",
-              "RelativeDocumentMoniker": "reactor_http_cpp\\PollDispatcher.h",
-              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.h",
-              "RelativeToolTip": "reactor_http_cpp\\PollDispatcher.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-01-11T12:53:41.661Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PollDispatcher.cpp",
-              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.cpp",
-              "RelativeDocumentMoniker": "reactor_http_cpp\\PollDispatcher.cpp",
-              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.cpp",
-              "RelativeToolTip": "reactor_http_cpp\\PollDispatcher.cpp",
-              "ViewState": "AQIAAGcAAAAAAAAAAAAAAAUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-11T12:53:00.487Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EpollDispatcher.cpp",
-              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EpollDispatcher.cpp",
-              "RelativeDocumentMoniker": "reactor_http_cpp\\EpollDispatcher.cpp",
-              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EpollDispatcher.cpp",
-              "RelativeToolTip": "reactor_http_cpp\\EpollDispatcher.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-11T12:23:28.97Z",
+              "WhenOpened": "2025-01-12T07:18:35.562Z",
               "EditorCaption": ""
             },
             {
@@ -127,7 +83,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "EventLoop.h",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.h",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\EventLoop.h",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EventLoop.h",
+              "RelativeToolTip": "reactor_http_cpp\\EventLoop.h",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAACYAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-11T15:13:35.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SelectDispatcher.h",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.h",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\SelectDispatcher.h",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.h",
+              "RelativeToolTip": "reactor_http_cpp\\SelectDispatcher.h",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-11T14:04:18.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SelectDispatcher.cpp",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\SelectDispatcher.cpp",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\SelectDispatcher.cpp",
+              "RelativeToolTip": "reactor_http_cpp\\SelectDispatcher.cpp",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAADkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-11T14:03:52.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PollDispatcher.h",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.h",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\PollDispatcher.h",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.h",
+              "RelativeToolTip": "reactor_http_cpp\\PollDispatcher.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-11T12:53:41.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PollDispatcher.cpp",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.cpp",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\PollDispatcher.cpp",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\PollDispatcher.cpp",
+              "RelativeToolTip": "reactor_http_cpp\\PollDispatcher.cpp",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-11T12:53:00.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "EpollDispatcher.cpp",
+              "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EpollDispatcher.cpp",
+              "RelativeDocumentMoniker": "reactor_http_cpp\\EpollDispatcher.cpp",
+              "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EpollDispatcher.cpp",
+              "RelativeToolTip": "reactor_http_cpp\\EpollDispatcher.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-11T12:23:28.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "EpollDispatcher.h",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\EpollDispatcher.h",
               "RelativeDocumentMoniker": "reactor_http_cpp\\EpollDispatcher.h",
@@ -135,12 +164,11 @@
               "RelativeToolTip": "reactor_http_cpp\\EpollDispatcher.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-01-11T12:24:10.761Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T12:24:10.761Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Dispatcher.cpp",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.cpp",
               "RelativeDocumentMoniker": "reactor_http_cpp\\Dispatcher.cpp",
@@ -153,46 +181,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Dispatcher.h",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.h",
               "RelativeDocumentMoniker": "reactor_http_cpp\\Dispatcher.h",
               "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Dispatcher.h",
               "RelativeToolTip": "reactor_http_cpp\\Dispatcher.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-01-11T10:10:46.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T10:10:46.269Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Channel.cpp",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.cpp",
               "RelativeDocumentMoniker": "reactor_http_cpp\\Channel.cpp",
               "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.cpp",
               "RelativeToolTip": "reactor_http_cpp\\Channel.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAA8AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-01-11T08:27:18.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "Channel.h",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.h",
               "RelativeDocumentMoniker": "reactor_http_cpp\\Channel.h",
               "ToolTip": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\Channel.h",
               "RelativeToolTip": "reactor_http_cpp\\Channel.h",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACQAAAAFAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAQwBYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-11T08:27:45.501Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\\u57FA\u4E8E\u591A\u53CD\u5E94\u5806( Reactor)\u7684\u9AD8\u5E76\u53D1\u670D\u52A1\u5668C\u002B\u002B\\reactor_http_cpp\\reactor_http_cpp\\main.cpp",
               "RelativeDocumentMoniker": "reactor_http_cpp\\main.cpp",

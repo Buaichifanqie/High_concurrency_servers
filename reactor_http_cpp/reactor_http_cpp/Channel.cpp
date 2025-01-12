@@ -1,11 +1,11 @@
 #include "Channel.h"
 #include <stdlib.h>
 
-Channel::Channel(int fd, int events, handleFunc readFunc, handleFunc writeFunc, handleFunc destroyFunc, void* arg)
+Channel::Channel(int fd, FDEvent events, handleFunc readFunc, handleFunc writeFunc, handleFunc destroyFunc, void* arg)
 {
     m_arg = arg;
     m_fd = fd;
-    m_events = events;
+    m_events = (int)events;
     readCallback = readFunc;
     writeCallback = writeFunc;
     destroyCallback = destroyFunc;

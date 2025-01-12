@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-struct EventLoop;
+class EventLoop;
 class Dispatcher
 {
 public:

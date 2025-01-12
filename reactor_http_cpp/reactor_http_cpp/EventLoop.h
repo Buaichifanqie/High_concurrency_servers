@@ -1,55 +1,62 @@
 #pragma once
-#include <stdbool.h>
 #include "Dispatcher.h"
-#include "ChannelMap.h"
-#include <pthread.h>
-
-extern struct Dispatcher EpollDispatcher;
-extern struct Dispatcher PollDispatcher;
-extern struct Dispatcher SelectDispatcher;
-
+#include "Channel.h"
+#include <thread>
+#include <queue>
+#include <map>
+#include <mutex>
+using namespace std;
 // 处理该节点中的channel的方式
-enum ElemType { ADD, DELETE, MODIFY };
+enum class ElemType : char { ADD, DELETE, MODIFY };
 // 定义任务队列的节点
 struct ChannelElement
 {
-    int type;   // 如何处理该节点中的channel
-    struct Channel* channel;
-    struct ChannelElement* next;
+    ElemType type;   // 如何处理该节点中的channel
+    Channel* channel;
 };
-struct Dispatcher;
-struct EventLoop
+class Dispatcher;
+class EventLoop
 {
-    bool isQuit;
-    struct Dispatcher* dispatcher;
-    void* dispatcherData;
+public:
+    //初始化
+    EventLoop();
+    EventLoop(const string threadName);
+    
+    ~EventLoop();
+    // 启动反应堆模型
+    int run();
+    // 处理别激活的文件fd
+    int eventActive(int fd, int event);
+    // 添加任务到任务队列
+    int addTask(struct Channel* channel, ElemType type);
+    // 处理任务队列中的任务
+    int processTaskQ();
+    // 处理dispatcher中的节点
+    int add(Channel* channel);
+    int remove(Channel* channel);
+    int modify(Channel* channel);
+    // 释放channel
+    int freeChannel(Channel* channel);
+    //读数据
+    int readMessage();
+    static int readLocalMessage(void* arg);
+    
+private:
+    void taskWakeup();
+private:
+    bool m_isQuit;
+    //该指针指向子类的实例epoll poll select
+    Dispatcher* m_dispatcher;
     // 任务队列
-    struct ChannelElement* head;
-    struct ChannelElement* tail;
+    queue<ChannelElement*>m_taskQ;
     // map
-    struct ChannelMap* channelMap;
+    map<int, Channel*>m_channelMap;
     // 线程id, name, mutex
-    pthread_t threadID;
-    char threadName[32];
-    pthread_mutex_t mutex;
-    int socketPair[2];  // 存储本地通信的fd 通过socketpair 初始化
+    thread::id m_threadID;
+    string m_threadName;
+    mutex m_mutex;
+    int m_socketPair[2];  // 存储本地通信的fd 通过socketpair 初始化
 };
 
-// 初始化
-struct EventLoop* eventLoopInit();
-struct EventLoop* eventLoopInitEx(const char* threadName);
-// 启动反应堆模型
-int eventLoopRun(struct EventLoop* evLoop);
-// 处理别激活的文件fd
-int eventActivate(struct EventLoop* evLoop, int fd, int event);
-// 添加任务到任务队列
-int eventLoopAddTask(struct EventLoop* evLoop, struct Channel* channel, int type);
-// 处理任务队列中的任务
-int eventLoopProcessTask(struct EventLoop* evLoop);
-// 处理dispatcher中的节点
-int eventLoopAdd(struct EventLoop* evLoop, struct Channel* channel);
-int eventLoopRemove(struct EventLoop* evLoop, struct Channel* channel);
-int eventLoopModify(struct EventLoop* evLoop, struct Channel* channel);
-// 释放channel
-int destroyChannel(struct EventLoop* evLoop, struct Channel* channel);
+
 

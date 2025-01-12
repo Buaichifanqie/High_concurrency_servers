@@ -79,7 +79,7 @@
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="EpollDispatcher.cpp" />
-    <ClCompile Include="EventLoop.c" />
+    <ClCompile Include="EventLoop.cpp" />
     <ClCompile Include="HttpRequest.c" />
     <ClCompile Include="HttpResponse.c" />
     <ClCompile Include="main.c" />
