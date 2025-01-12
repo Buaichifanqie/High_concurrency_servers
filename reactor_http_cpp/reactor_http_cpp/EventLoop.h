@@ -40,6 +40,11 @@ public:
     //读数据
     int readMessage();
     static int readLocalMessage(void* arg);
+    //返回线程id
+    inline thread::id getThreadID()
+    {
+        return m_threadID;
+    }
     
 private:
     void taskWakeup();
