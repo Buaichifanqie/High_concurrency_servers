@@ -75,7 +75,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClCompile Include="Buffer.c" />
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="EpollDispatcher.cpp" />
@@ -87,7 +87,7 @@
     <ClCompile Include="PollDispatcher.cpp" />
     <ClCompile Include="SelectDispatcher.cpp" />
     <ClCompile Include="TcpConnection.c" />
-    <ClCompile Include="TcpServer.c" />
+    <ClCompile Include="TcpServer.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="WorkerThread.cpp" />
   </ItemGroup>
