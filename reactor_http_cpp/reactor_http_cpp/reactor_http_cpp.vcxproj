@@ -80,7 +80,7 @@
     <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="EpollDispatcher.cpp" />
     <ClCompile Include="EventLoop.cpp" />
-    <ClCompile Include="HttpRequest.c" />
+    <ClCompile Include="HttpRequest.cpp" />
     <ClCompile Include="HttpResponse.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="main.cpp" />

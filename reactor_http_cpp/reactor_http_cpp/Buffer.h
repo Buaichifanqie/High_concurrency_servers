@@ -26,6 +26,16 @@ public:
     char* findCRLF();
     // 发送数据
     int sendData(int socket);
+    //得到读数据的起始位置
+    inline char* data()
+    {
+        return m_data + m_readPos;
+    }
+    inline int readPosIncrease(int count)
+    {
+        m_readPos += count;
+        return m_readPos;
+    }
 private:
     // 指向内存的指针
     char* m_data;

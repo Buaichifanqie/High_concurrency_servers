@@ -112,7 +112,7 @@ char* Buffer::findCRLF()
         // memmem --> 大数据块中匹配子数据块(需要指定数据块大小)
         // void *memmem(const void *haystack, size_t haystacklen,
         //      const void* needle, size_t needlelen);
-    char* ptr = memmem(m_data + m_readPos, readableSize(), "\r\n", 2);
+    char* ptr = static_cast<char*>(memmem(m_data + m_readPos, readableSize(), "\r\n", 2));
     return ptr;
 }
 

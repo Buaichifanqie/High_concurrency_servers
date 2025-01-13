@@ -2,16 +2,12 @@
 #include "Buffer.h"
 #include <stdbool.h>
 #include "HttpResponse.h"
-
-// 请求头键值对
-struct RequestHeader
-{
-    char* key;
-    char* value;
-};
+#include <map>
+#include <functional>
+using namespace std;
 
 // 当前的解析状态
-enum HttpRequestState
+enum class PrecessState:char
 {
     ParseReqLine,
     ParseReqHeaders,
@@ -19,39 +15,65 @@ enum HttpRequestState
     ParseReqDone
 };
 // 定义http请求结构体
-struct HttpRequest
+class HttpRequest
 {
-    char* method;
-    char* url;
-    char* version;
-    struct RequestHeader* reqHeaders;
-    int reqHeadersNum;
-    enum HttpRequestState curState;
+public:
+    // 初始化
+    HttpRequest();
+    ~HttpRequest();
+    // 重置
+    void reset();
+    
+    // 添加请求头
+    void addHeader(const string key, const string value);
+    // 根据key得到请求头的value
+    string getHeader(const string key);
+    // 解析请求行
+    bool parseRequestLine(Buffer* readBuf);
+    // 解析请求头
+    bool parseRequestHeader(Buffer* readBuf);
+    // 解析http请求协议
+    bool parseHttpRequest(Buffer* readBuf,HttpResponse* response,Buffer* sendBuf, int socket);
+    // 处理http请求协议
+    bool processHttpRequest(HttpResponse* response);
+    // 解码字符串
+    string decodeMsg(string from);
+    const string getFileType(const string name);
+    void sendDir(string dirName, Buffer* sendBuf, int cfd);
+    void sendFile(const string fileName,Buffer* sendBuf, int cfd);
+    inline void setMethod(string method)
+    {
+        m_method = method;
+    }
+    inline void seturl(string url)
+    {
+        m_url = url;
+    }
+    inline void setVersion(string version)
+    {
+        m_version = version;
+    }
+    // 获取处理状态
+    inline PrecessState getState()
+    {
+        return m_curState;
+    }
+    inline void setState(PrecessState state)
+    {
+        m_curState = state;
+    }
+
+private:
+    char* splitRequestLine(const char* start, const char* end, 
+        const char* sub, function<void(string)>callback);
+    int hexToDec(char c);
+
+private:    
+    string m_method;
+    string m_url;
+    string m_version;
+    // 请求头键值对
+    map<string,string> m_reqHeaders;
+    PrecessState m_curState;
 };
 
-// 初始化
-struct HttpRequest* httpRequestInit();
-// 重置
-void httpRequestReset(struct HttpRequest* req);
-void httpRequestResetEx(struct HttpRequest* req);
-void httpRequestDestroy(struct HttpRequest* req);
-// 获取处理状态
-enum HttpRequestState httpRequestState(struct HttpRequest* request);
-// 添加请求头
-void httpRequestAddHeader(struct HttpRequest* request, const char* key, const char* value);
-// 根据key得到请求头的value
-char* httpRequestGetHeader(struct HttpRequest* request, const char* key);
-// 解析请求行
-bool parseHttpRequestLine(struct HttpRequest* request, struct Buffer* readBuf);
-// 解析请求头
-bool parseHttpRequestHeader(struct HttpRequest* request, struct Buffer* readBuf);
-// 解析http请求协议
-bool parseHttpRequest(struct HttpRequest* request, struct Buffer* readBuf,
-    struct HttpResponse* response, struct Buffer* sendBuf, int socket);
-// 处理http请求协议
-bool processHttpRequest(struct HttpRequest* request, struct HttpResponse* response);
-// 解码字符串
-void decodeMsg(char* to, char* from);
-const char* getFileType(const char* name);
-void sendDir(const char* dirName, struct Buffer* sendBuf, int cfd);
-void sendFile(const char* fileName, struct Buffer* sendBuf, int cfd);
