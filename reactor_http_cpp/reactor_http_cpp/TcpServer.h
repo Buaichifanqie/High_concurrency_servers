@@ -2,18 +2,16 @@
 #include "EventLoop.h"
 #include "ThreadPool.h"
 
-
 class TcpServer
 {
 public:
-    // 初始化
     TcpServer(unsigned short port, int threadNum);
     // 初始化监听
     void setListen();
     // 启动服务器
     void run();
-
     static int acceptConnection(void* arg);
+
 private:
     int m_threadNum;
     EventLoop* m_mainLoop;

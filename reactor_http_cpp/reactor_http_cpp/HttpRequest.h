@@ -3,11 +3,10 @@
 #include <stdbool.h>
 #include "HttpResponse.h"
 #include <map>
-#include <functional>
 using namespace std;
 
 // 当前的解析状态
-enum class PrecessState:char
+enum class PrecessState :char
 {
     ParseReqLine,
     ParseReqHeaders,
@@ -18,12 +17,10 @@ enum class PrecessState:char
 class HttpRequest
 {
 public:
-    // 初始化
     HttpRequest();
     ~HttpRequest();
     // 重置
     void reset();
-    
     // 添加请求头
     void addHeader(const string key, const string value);
     // 根据key得到请求头的value
@@ -33,14 +30,14 @@ public:
     // 解析请求头
     bool parseRequestHeader(Buffer* readBuf);
     // 解析http请求协议
-    bool parseHttpRequest(Buffer* readBuf,HttpResponse* response,Buffer* sendBuf, int socket);
+    bool parseHttpRequest(Buffer* readBuf, HttpResponse* response, Buffer* sendBuf, int socket);
     // 处理http请求协议
     bool processHttpRequest(HttpResponse* response);
     // 解码字符串
     string decodeMsg(string from);
     const string getFileType(const string name);
-    void sendDir(string dirName, Buffer* sendBuf, int cfd);
-    void sendFile(const string fileName,Buffer* sendBuf, int cfd);
+    static void sendDir(string dirName, Buffer* sendBuf, int cfd);
+    static void sendFile(string dirName, Buffer* sendBuf, int cfd);
     inline void setMethod(string method)
     {
         m_method = method;
@@ -64,16 +61,15 @@ public:
     }
 
 private:
-    char* splitRequestLine(const char* start, const char* end, 
-        const char* sub, function<void(string)>callback);
+    char* splitRequestLine(const char* start, const char* end,
+        const char* sub, function<void(string)> callback);
     int hexToDec(char c);
 
-private:    
+private:
     string m_method;
     string m_url;
     string m_version;
-    // 请求头键值对
-    map<string,string> m_reqHeaders;
+    map<string, string> m_reqHeaders;
     PrecessState m_curState;
 };
 

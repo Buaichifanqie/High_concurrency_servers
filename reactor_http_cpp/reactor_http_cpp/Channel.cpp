@@ -15,16 +15,16 @@ void Channel::writeEventEnable(bool flag)
 {
     if (flag)
     {
-        //m_events |= (int)FDEvent::WriteEvent;
+        // m_events |= (int)FDEvent::WriteEvent;
         m_events |= static_cast<int>(FDEvent::WriteEvent);
     }
     else
     {
-        m_events = m_events & ~static_cast<int>(FDEvent::WriteEvent);
+        m_events = m_events & ~(int)FDEvent::WriteEvent;
     }
 }
 
 bool Channel::isWriteEventEnable()
 {
-    return m_events & static_cast<int>(FDEvent::WriteEvent);
+    return m_events & (int)FDEvent::WriteEvent;
 }

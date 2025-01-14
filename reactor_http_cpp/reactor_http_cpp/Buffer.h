@@ -1,11 +1,13 @@
 #pragma once
+#include <string>
+using namespace std;
 
 class Buffer
 {
 public:
-    // 初始化
     Buffer(int size);
     ~Buffer();
+
     // 扩容
     void extendRoom(int size);
     // 得到剩余的可写的内存容量
@@ -21,12 +23,13 @@ public:
     // 写内存 1. 直接写 2. 接收套接字数据
     int appendString(const char* data, int size);
     int appendString(const char* data);
+    int appendString(const string data);
     int socketRead(int fd);
     // 根据\r\n取出一行, 找到其在数据块中的位置, 返回该位置
     char* findCRLF();
     // 发送数据
-    int sendData(int socket);
-    //得到读数据的起始位置
+    int sendData(int socket);    // 指向内存的指针
+    // 得到读数据的起始位置
     inline char* data()
     {
         return m_data + m_readPos;
@@ -37,10 +40,9 @@ public:
         return m_readPos;
     }
 private:
-    // 指向内存的指针
     char* m_data;
-    int m_capacity;//标记内存容量
-    int m_readPos=0;//记录数据读到哪里了
-    int m_writePos=0;//数据写到哪里了（都是相对于m_data的起始地址）
+    int m_capacity;
+    int m_readPos = 0;
+    int m_writePos = 0;
 };
 

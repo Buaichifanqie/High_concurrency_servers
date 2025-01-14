@@ -1,12 +1,12 @@
 #pragma once
 #include "Channel.h"
 #include "EventLoop.h"
-#include <string>
 #include "Dispatcher.h"
+#include <string>
 #include <sys/epoll.h>
 using namespace std;
 
-class EpollDispatcher:public Dispatcher
+class EpollDispatcher : public Dispatcher
 {
 public:
     EpollDispatcher(EventLoop* evloop);
@@ -19,8 +19,10 @@ public:
     int modify() override;
     // 事件监测
     int dispatch(int timeout = 2) override; // 单位: s
+
 private:
     int epollCtl(int op);
+
 private:
     int m_epfd;
     struct epoll_event* m_events;

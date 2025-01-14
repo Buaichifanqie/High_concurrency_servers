@@ -7,18 +7,22 @@
 
 //#define MSG_SEND_AUTO
 
-struct TcpConnection
+class TcpConnection
 {
-    struct EventLoop* evLoop;
-    struct Channel* channel;
-    struct Buffer* readBuf;
-    struct Buffer* writeBuf;
-    char name[32];
-    // http 协议
-    struct HttpRequest* request;
-    struct HttpResponse* response;
-};
+public:
+    TcpConnection(int fd, EventLoop* evloop);
+    ~TcpConnection();
 
-// 初始化
-struct TcpConnection* tcpConnectionInit(int fd, struct EventLoop* evloop);
-int tcpConnectionDestroy(void* conn);
+    static int processRead(void* arg);
+    static int processWrite(void* arg);
+    static int destroy(void* arg);
+private:
+    string m_name;
+    EventLoop* m_evLoop;
+    Channel* m_channel;
+    Buffer* m_readBuf;
+    Buffer* m_writeBuf;
+    // http 协议
+    HttpRequest* m_request;
+    HttpResponse* m_response;
+};

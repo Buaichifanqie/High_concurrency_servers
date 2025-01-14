@@ -4,11 +4,11 @@
 #include "WorkerThread.h"
 #include <vector>
 using namespace std;
+
 // 定义线程池
 class ThreadPool
 {
 public:
-    // 初始化线程池
     ThreadPool(EventLoop* mainLoop, int count);
     ~ThreadPool();
     // 启动线程池

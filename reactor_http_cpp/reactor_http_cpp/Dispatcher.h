@@ -3,7 +3,6 @@
 #include "EventLoop.h"
 #include <string>
 using namespace std;
-
 class EventLoop;
 class Dispatcher
 {
@@ -18,7 +17,7 @@ public:
     virtual int modify();
     // 事件监测
     virtual int dispatch(int timeout = 2); // 单位: s
-    inline int setChannel(Channel* channel)
+    inline void setChannel(Channel* channel)
     {
         m_channel = channel;
     }

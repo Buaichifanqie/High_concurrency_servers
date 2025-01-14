@@ -1,4 +1,4 @@
-#define _GNU_SOURCE
+//#define _GNU_SOURCE
 #include "Buffer.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,8 +8,7 @@
 #include <strings.h>
 #include <sys/socket.h>
 
-
-Buffer::Buffer(int size):m_capacity(size)
+Buffer::Buffer(int size) :m_capacity(size)
 {
     m_data = (char*)malloc(size);
     bzero(m_data, size);
@@ -50,8 +49,9 @@ void Buffer::extendRoom(int size)
         {
             return; // 失败了
         }
-        memset(temp + m_capacity, 0, size);
-        m_data =static_cast<char*>(temp);
+        memset((char*)temp + m_capacity, 0, size);
+        // 更新数据
+        m_data = static_cast<char*>(temp);
         m_capacity += size;
     }
 }
@@ -74,6 +74,12 @@ int Buffer::appendString(const char* data)
 {
     int size = strlen(data);
     int ret = appendString(data, size);
+    return ret;
+}
+
+int Buffer::appendString(const string data)
+{
+    int ret = appendString(data.data());
     return ret;
 }
 
@@ -108,11 +114,7 @@ int Buffer::socketRead(int fd)
 
 char* Buffer::findCRLF()
 {
-    // strstr --> 大字符串中匹配子字符串(遇到\0结束) char *strstr(const char *haystack, const char *needle);
-        // memmem --> 大数据块中匹配子数据块(需要指定数据块大小)
-        // void *memmem(const void *haystack, size_t haystacklen,
-        //      const void* needle, size_t needlelen);
-    char* ptr = static_cast<char*>(memmem(m_data + m_readPos, readableSize(), "\r\n", 2));
+    char* ptr = (char*)memmem(m_data + m_readPos, readableSize(), "\r\n", 2);
     return ptr;
 }
 
@@ -132,3 +134,4 @@ int Buffer::sendData(int socket)
     }
     return 0;
 }
+

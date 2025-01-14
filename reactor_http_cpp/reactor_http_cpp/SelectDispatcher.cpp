@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include "SelectDispatcher.h"
 
-
-SelectDispatcher::SelectDispatcher(EventLoop* evloop):Dispatcher(evloop)
+SelectDispatcher::SelectDispatcher(EventLoop* evloop) :Dispatcher(evloop)
 {
     FD_ZERO(&m_readSet);
     FD_ZERO(&m_writeSet);
@@ -31,6 +30,7 @@ int SelectDispatcher::remove()
     clearFdSet();
     // 通过 channel 释放对应的 TcpConnection 资源
     m_channel->destroyCallback(const_cast<void*>(m_channel->getArg()));
+
     return 0;
 }
 
@@ -58,12 +58,12 @@ int SelectDispatcher::dispatch(int timeout)
     {
         if (FD_ISSET(i, &rdtmp))
         {
-            eventActivate(evLoop, i, ReadEvent);
+            m_evLoop->eventActive(i, (int)FDEvent::ReadEvent);
         }
 
         if (FD_ISSET(i, &wrtmp))
         {
-            eventActivate(evLoop, i, WriteEvent);
+            m_evLoop->eventActive(i, (int)FDEvent::WriteEvent);
         }
     }
     return 0;

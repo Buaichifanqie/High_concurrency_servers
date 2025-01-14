@@ -81,12 +81,11 @@
     <ClCompile Include="EpollDispatcher.cpp" />
     <ClCompile Include="EventLoop.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
-    <ClCompile Include="HttpResponse.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="HttpResponse.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PollDispatcher.cpp" />
     <ClCompile Include="SelectDispatcher.cpp" />
-    <ClCompile Include="TcpConnection.c" />
+    <ClCompile Include="TcpConnection.cpp" />
     <ClCompile Include="TcpServer.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="WorkerThread.cpp" />
@@ -107,7 +106,26 @@
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="WorkerThread.h" />
   </ItemGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Link>
+      <LibraryDependencies>pthread</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <Link>
+      <LibraryDependencies>pthread</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <LibraryDependencies>pthread</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <Link>
+      <LibraryDependencies>pthread</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

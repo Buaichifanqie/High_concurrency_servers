@@ -6,8 +6,9 @@
 #include <map>
 #include <mutex>
 using namespace std;
+
 // 处理该节点中的channel的方式
-enum class ElemType : char { ADD, DELETE, MODIFY };
+enum class ElemType :char { ADD, DELETE, MODIFY };
 // 定义任务队列的节点
 struct ChannelElement
 {
@@ -15,13 +16,12 @@ struct ChannelElement
     Channel* channel;
 };
 class Dispatcher;
+
 class EventLoop
 {
 public:
-    //初始化
     EventLoop();
     EventLoop(const string threadName);
-    
     ~EventLoop();
     // 启动反应堆模型
     int run();
@@ -37,31 +37,34 @@ public:
     int modify(Channel* channel);
     // 释放channel
     int freeChannel(Channel* channel);
-    //读数据
     int readMessage();
-    static int readLocalMessage(void* arg);
-    //返回线程id
+    // 返回线程ID
     inline thread::id getThreadID()
     {
         return m_threadID;
     }
-    
+    inline string getThreadName()
+    {
+        return m_threadName;
+    }
+    static int readLocalMessage(void* arg);
+
 private:
     void taskWakeup();
+
 private:
     bool m_isQuit;
-    //该指针指向子类的实例epoll poll select
+    // 该指针指向子类的实例 epoll, poll, select
     Dispatcher* m_dispatcher;
     // 任务队列
-    queue<ChannelElement*>m_taskQ;
+    queue<ChannelElement*> m_taskQ;
     // map
-    map<int, Channel*>m_channelMap;
+    map<int, Channel*> m_channelMap;
     // 线程id, name, mutex
     thread::id m_threadID;
     string m_threadName;
     mutex m_mutex;
     int m_socketPair[2];  // 存储本地通信的fd 通过socketpair 初始化
 };
-
 
 

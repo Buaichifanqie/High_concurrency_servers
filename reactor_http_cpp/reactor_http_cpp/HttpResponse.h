@@ -1,8 +1,11 @@
 #pragma once
 #include "Buffer.h"
+#include <map>
+#include <functional>
+using namespace std;
 
 // 定义状态码枚举
-enum HttpStatusCode
+enum class StatusCode
 {
     Unknown,
     OK = 200,
@@ -12,34 +15,38 @@ enum HttpStatusCode
     NotFound = 404
 };
 
-// 定义响应的结构体
-struct ResponseHeader
-{
-    char key[32];
-    char value[128];
-};
-
-// 定义一个函数指针, 用来组织要回复给客户端的数据块
-typedef void (*responseBody)(const char* fileName, struct Buffer* sendBuf, int socket);
-
 // 定义结构体
-struct HttpResponse
+class HttpResponse
 {
+public:
+    HttpResponse();
+    ~HttpResponse();
+    function<void(const string, struct Buffer*, int)> sendDataFunc;
+    // 添加响应头
+    void addHeader(const string key, const string value);
+    // 组织http响应数据
+    void prepareMsg(Buffer* sendBuf, int socket);
+    inline void setFileName(string name)
+    {
+        m_fileName = name;
+    }
+    inline void setStatusCode(StatusCode code)
+    {
+        m_statusCode = code;
+    }
+private:
     // 状态行: 状态码, 状态描述
-    enum HttpStatusCode statusCode;
-    char statusMsg[128];
-    char fileName[128];
+    StatusCode m_statusCode;
+    string m_fileName;
     // 响应头 - 键值对
-    struct ResponseHeader* headers;
-    int headerNum;
-    responseBody sendDataFunc;
+    map<string, string> m_headers;
+    // 定义状态码和描述的对应关系
+    const map<int, string> m_info = {
+        {200, "OK"},
+        {301, "MovedPermanently"},
+        {302, "MovedTemporarily"},
+        {400, "BadRequest"},
+        {404, "NotFound"},
+    };
 };
 
-// 初始化
-struct HttpResponse* httpResponseInit();
-// 销毁
-void httpResponseDestroy(struct HttpResponse* response);
-// 添加响应头
-void httpResponseAddHeader(struct HttpResponse*, const char* key, const char* value);
-// 组织http响应数据
-void httpResponsePrepareMsg(struct HttpResponse* response, struct Buffer* sendBuf, int socket);

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "PollDispatcher.h"
 
-PollDispatcher::PollDispatcher(EventLoop* evloop):Dispatcher(evloop)
+PollDispatcher::PollDispatcher(EventLoop* evloop) : Dispatcher(evloop)
 {
     m_maxfd = 0;
     m_fds = new struct pollfd[m_maxNode];
@@ -93,7 +93,7 @@ int PollDispatcher::modify()
             break;
         }
     }
-    if (i >= m_maxfd)
+    if (i >= m_maxNode)
     {
         return -1;
     }
@@ -117,11 +117,11 @@ int PollDispatcher::dispatch(int timeout)
 
         if (m_fds[i].revents & POLLIN)
         {
-            eventActivate(evLoop, data->fds[i].fd, ReadEvent);
+            m_evLoop->eventActive(m_fds[i].fd, (int)FDEvent::ReadEvent);
         }
         if (m_fds[i].revents & POLLOUT)
         {
-            eventActivate(evLoop, data->fds[i].fd, WriteEvent);
+            m_evLoop->eventActive(m_fds[i].fd, (int)FDEvent::WriteEvent);
         }
     }
     return 0;

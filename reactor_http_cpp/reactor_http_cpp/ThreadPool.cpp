@@ -2,21 +2,6 @@
 #include <assert.h>
 #include <stdlib.h>
 
-struct ThreadPool* threadPoolInit(struct EventLoop* mainLoop, int count)
-{
-   
-}
-
-void threadPoolRun(struct ThreadPool* pool)
-{
-    
-}
-
-struct EventLoop* takeWorkerEventLoop(struct ThreadPool* pool)
-{
-   
-}
-
 ThreadPool::ThreadPool(EventLoop* mainLoop, int count)
 {
     m_index = 0;
@@ -42,7 +27,7 @@ void ThreadPool::run()
         exit(0);
     }
     m_isStart = true;
-    if (m_threadNum>0)
+    if (m_threadNum > 0)
     {
         for (int i = 0; i < m_threadNum; ++i)
         {
@@ -61,7 +46,7 @@ EventLoop* ThreadPool::takeWorkerEventLoop()
         exit(0);
     }
     // 从线程池中找一个子线程, 然后取出里边的反应堆实例
-    struct EventLoop* evLoop = m_mainLoop;
+    EventLoop* evLoop = m_mainLoop;
     if (m_threadNum > 0)
     {
         evLoop = m_workerThreads[m_index]->getEventLoop();

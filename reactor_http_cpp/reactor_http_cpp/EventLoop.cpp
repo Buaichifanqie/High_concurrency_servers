@@ -9,20 +9,16 @@
 #include "PollDispatcher.h"
 #include "EpollDispatcher.h"
 
-// 写数据
-void EventLoop::taskWakeup()
+EventLoop::EventLoop() : EventLoop(string())
 {
-    const char* msg = "我要玩奥奇传说！！！";
-    write(m_socketPair[0], msg, strlen(msg));
 }
-
 
 EventLoop::EventLoop(const string threadName)
 {
-    m_isQuit = true;//默认没有启动
+    m_isQuit = true;    // 默认没有启动
     m_threadID = this_thread::get_id();
     m_threadName = threadName == string() ? "MainThread" : threadName;
-    m_dispatcher = new EpollDispatcher(this);
+    m_dispatcher = new SelectDispatcher(this);
     // map
     m_channelMap.clear();
     int ret = socketpair(AF_UNIX, SOCK_STREAM, 0, m_socketPair);
@@ -33,16 +29,16 @@ EventLoop::EventLoop(const string threadName)
     }
 #if 0
     // 指定规则: evLoop->socketPair[0] 发送数据, evLoop->socketPair[1] 接收数据
-    Channel* channel = new Channel(m_socketPair[1],FDEvent::ReadEvent,
+    Channel* channel = new Channel(m_socketPair[1], FDEvent::ReadEvent,
         readLocalMessage, nullptr, nullptr, this);
 #else
-    //绑定--bind 
+    // 绑定 - bind
     auto obj = bind(&EventLoop::readMessage, this);
     Channel* channel = new Channel(m_socketPair[1], FDEvent::ReadEvent,
         obj, nullptr, nullptr, this);
 #endif
     // channel 添加到任务队列
-    addTask(channel,ElemType::ADD);
+    addTask(channel, ElemType::ADD);
 }
 
 EventLoop::~EventLoop()
@@ -120,14 +116,15 @@ int EventLoop::addTask(Channel* channel, ElemType type)
 
 int EventLoop::processTaskQ()
 {
+    // 取出头结点
     while (!m_taskQ.empty())
     {
         m_mutex.lock();
         ChannelElement* node = m_taskQ.front();
-        m_taskQ.pop(); //删除节点
+        m_taskQ.pop();  // 删除节点
         m_mutex.unlock();
         Channel* channel = node->channel;
-        if (node->type ==ElemType::ADD)
+        if (node->type == ElemType::ADD)
         {
             // 添加
             add(channel);
@@ -151,7 +148,7 @@ int EventLoop::add(Channel* channel)
 {
     int fd = channel->getSocket();
     // 找到fd对应的数组元素位置, 并存储
-    if (m_channelMap.find(fd)==m_channelMap.end())
+    if (m_channelMap.find(fd) == m_channelMap.end())
     {
         m_channelMap.insert(make_pair(fd, channel));
         m_dispatcher->setChannel(channel);
@@ -185,6 +182,20 @@ int EventLoop::modify(Channel* channel)
     return ret;
 }
 
+int EventLoop::readLocalMessage(void* arg)
+{
+    EventLoop* evLoop = static_cast<EventLoop*>(arg);
+    char buf[256];
+    read(evLoop->m_socketPair[1], buf, sizeof(buf));
+    return 0;
+}
+
+void EventLoop::taskWakeup()
+{
+    const char* msg = "我是要成为海贼王的男人!!!";
+    write(m_socketPair[0], msg, strlen(msg));
+}
+
 int EventLoop::freeChannel(Channel* channel)
 {
     // 删除 channel 和 fd 的对应关系
@@ -195,14 +206,6 @@ int EventLoop::freeChannel(Channel* channel)
         close(channel->getSocket());
         delete channel;
     }
-    return 0;
-}
-
-int EventLoop::readLocalMessage(void* arg)
-{
-    EventLoop* evLoop =static_cast<EventLoop*>(arg);
-    char buf[256];
-    read(evLoop->m_socketPair[1], buf, sizeof(buf));
     return 0;
 }
 

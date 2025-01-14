@@ -1,12 +1,12 @@
 #pragma once
 #include "Channel.h"
 #include "EventLoop.h"
-#include <string>
 #include "Dispatcher.h"
+#include <string>
 #include <sys/select.h>
 using namespace std;
 
-class SelectDispatcher :public Dispatcher
+class SelectDispatcher : public Dispatcher
 {
 public:
     SelectDispatcher(EventLoop* evloop);
@@ -19,6 +19,7 @@ public:
     int modify() override;
     // 事件监测
     int dispatch(int timeout = 2) override; // 单位: s
+
 private:
     void setFdSet();
     void clearFdSet();

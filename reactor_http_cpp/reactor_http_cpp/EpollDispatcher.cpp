@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "EpollDispatcher.h"
 
-EpollDispatcher::EpollDispatcher(EventLoop* evloop):Dispatcher(evloop)
+EpollDispatcher::EpollDispatcher(EventLoop* evloop) : Dispatcher(evloop)
 {
     m_epfd = epoll_create(10);
     if (m_epfd == -1)
@@ -64,7 +64,7 @@ int EpollDispatcher::dispatch(int timeout)
     int count = epoll_wait(m_epfd, m_events, m_maxNode, timeout * 1000);
     for (int i = 0; i < count; ++i)
     {
-        int events =m_events[i].events;
+        int events = m_events[i].events;
         int fd = m_events[i].data.fd;
         if (events & EPOLLERR || events & EPOLLHUP)
         {
@@ -74,11 +74,11 @@ int EpollDispatcher::dispatch(int timeout)
         }
         if (events & EPOLLIN)
         {
-            eventActivate(evLoop, fd, ReadEvent);
+            m_evLoop->eventActive(fd, (int)FDEvent::ReadEvent);
         }
         if (events & EPOLLOUT)
         {
-            eventActivate(evLoop, fd,WriteEvent);
+            m_evLoop->eventActive(fd, (int)FDEvent::WriteEvent);
         }
     }
     return 0;
@@ -89,11 +89,11 @@ int EpollDispatcher::epollCtl(int op)
     struct epoll_event ev;
     ev.data.fd = m_channel->getSocket();
     int events = 0;
-    if (m_channel->getEvent() & static_cast<int>(FDEvent::ReadEvent))
+    if (m_channel->getEvent() & (int)FDEvent::ReadEvent)
     {
         events |= EPOLLIN;
     }
-    if (m_channel->getEvent() & static_cast<int>(FDEvent::WriteEvent))
+    if (m_channel->getEvent() & (int)FDEvent::WriteEvent)
     {
         events |= EPOLLOUT;
     }
